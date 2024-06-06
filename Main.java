@@ -97,7 +97,7 @@ public class Main extends JFrame {
     int indice = catalogo.buscarLivro(isbn);
 
     if (indice != -1) {
-      Livro livro = catalogo.getLivros().get(indice);
+      Livro livro = (Livro) catalogo.getLivros().pega(indice);
       resultadoArea.setText("Livro encontrado:\n" + livro);
     } else {
       resultadoArea.setText("Livro com ISBN " + isbn + " não encontrado.");

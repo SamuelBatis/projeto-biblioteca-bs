@@ -1,30 +1,28 @@
-import java.util.LinkedList;
 
 // Classe Catalogo
 class Catalogo {
-  private LinkedList<Livro> livros;
+  private ListaLigadaD livros;
 
   public Catalogo() {
-    this.livros = new LinkedList<>();
+    this.livros = new ListaLigadaD();
   }
 
   public void adicionarLivro(Livro livro) {
-    // Assumindo que os livros são adicionados em ordem crescente de ISBN
-    livros.add(livro);
+    livros.adiciona(livro);
   }
 
-  public LinkedList<Livro> getLivros() {
+  public ListaLigadaD getLivros() {
     return livros;
   }
 
   public int buscarLivro(String isbn) {
-    return buscarLivroBinario(isbn, 0, livros.size() - 1);
+    return buscarLivroBinario(isbn, 0, livros.tamanho() - 1);
   }
 
   private int buscarLivroBinario(String isbn, int inicio, int fim) {
     if (inicio <= fim) {
       int meio = inicio + (fim - inicio) / 2;
-      Livro livro = livros.get(meio);
+      Livro livro = (Livro) livros.pega(meio);
       int comparacao = livro.getIsbn().compareTo(isbn);
 
       if (comparacao == 0) {
