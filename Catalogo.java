@@ -1,4 +1,3 @@
-
 // Classe Catalogo
 class Catalogo {
   private ListaLigadaD livros;
@@ -9,6 +8,7 @@ class Catalogo {
 
   public void adicionarLivro(Livro livro) {
     livros.adiciona(livro);
+    ordenarLivrosPorISBN(); // Garante que a lista esteja ordenada após adicionar um novo livro
   }
 
   public ListaLigadaD getLivros() {
@@ -19,19 +19,50 @@ class Catalogo {
     return buscarLivroBinario(isbn, 0, livros.tamanho() - 1);
   }
 
+  private void ordenarLivrosPorISBN() {
+    // Implementar ordenação por inserção direta
+    ListaLigadaD livrosOrdenados = new ListaLigadaD();
+
+    int tamanho = livros.tamanho();
+    for (int i = 0; i < tamanho; i++) {
+      Livro livroAtual = (Livro) livros.pega(i);
+      inserirOrdenado(livrosOrdenados, livroAtual);
+    }
+
+    this.livros = livrosOrdenados;
+  }
+
+  private void inserirOrdenado(ListaLigadaD lista, Livro livro) {
+    int tamanho = lista.tamanho();
+    int posicao = 0;
+
+    while (posicao < tamanho) {
+      Livro livroNaLista = (Livro) lista.pega(posicao);
+      if (livro.getIsbn().compareTo(livroNaLista.getIsbn()) < 0) {
+        break;
+      }
+      posicao++;
+    }
+
+    lista.adiciona(posicao, livro);
+  }
+
   private int buscarLivroBinario(String isbn, int inicio, int fim) {
-    if (inicio <= fim) {
-      int meio = inicio + (fim - inicio) / 2;
-      Livro livro = (Livro) livros.pega(meio);
+    // Converte a lógica do seu algoritmo de busca binária para trabalhar com ISBN
+    int min = inicio;
+    int max = fim;
+    while (min <= max) {
+      int med = (min + max) >>> 1;
+      Livro livro = (Livro) livros.pega(med);
       int comparacao = livro.getIsbn().compareTo(isbn);
 
       if (comparacao == 0) {
-        return meio; // ISBN encontrado
+        return med; // ISBN encontrado
       }
       if (comparacao < 0) {
-        return buscarLivroBinario(isbn, meio + 1, fim);
+        min = med + 1;
       } else {
-        return buscarLivroBinario(isbn, inicio, meio - 1);
+        max = med - 1;
       }
     }
     return -1; // ISBN não encontrado

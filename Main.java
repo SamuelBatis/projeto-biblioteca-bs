@@ -12,10 +12,11 @@ public class Main extends JFrame {
     catalogo = new Catalogo();
 
     setTitle("Catálogo de Livros");
-    setSize(600, 400);
+    setSize(800, 600);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout());
 
+    // Painel de Cadastro
     JPanel painelCadastro = new JPanel();
     painelCadastro.setLayout(new GridLayout(6, 2));
 
@@ -48,8 +49,7 @@ public class Main extends JFrame {
     });
     painelCadastro.add(adicionarButton);
 
-    add(painelCadastro, BorderLayout.NORTH);
-
+    // Painel de Busca
     JPanel painelBusca = new JPanel();
     painelBusca.setLayout(new FlowLayout());
 
@@ -66,11 +66,22 @@ public class Main extends JFrame {
     });
     painelBusca.add(buscarButton);
 
-    add(painelBusca, BorderLayout.CENTER);
+    // Painel superior contendo painel de cadastro e painel de busca
+    JPanel painelSuperior = new JPanel();
+    painelSuperior.setLayout(new BorderLayout());
+    painelSuperior.add(painelCadastro, BorderLayout.NORTH);
+    painelSuperior.add(painelBusca, BorderLayout.SOUTH);
 
+    // Area de resultado
     resultadoArea = new JTextArea();
     resultadoArea.setEditable(false);
-    add(new JScrollPane(resultadoArea), BorderLayout.SOUTH);
+    JScrollPane scrollPane = new JScrollPane(resultadoArea);
+
+    // SplitPane para dividir painel superior e área de resultado
+    JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, painelSuperior, scrollPane);
+    splitPane.setDividerLocation(300); // Ajusta a posição inicial do divisor
+
+    add(splitPane, BorderLayout.CENTER);
   }
 
   private void adicionarLivro() {
