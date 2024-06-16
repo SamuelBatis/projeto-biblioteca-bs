@@ -7,8 +7,14 @@ public class CatalogoDeLivros {
   }
 
   private void inicializarCatalogo() {
-    adicionarLivro(new Livro("Livro A", "Autor A", "1234567890", "Editora A", "01/01/2020", "Descrição do Livro A",
-        "Ficção", "./capas/91+1SUO3vUL._AC_UF1000,1000_QL80_.jpg"));
+    adicionarLivro(
+        new Livro("Gerra dos Tronos", "George R.R Martin", "9788496208490", "Bantam Spectra", "01/08/1996",
+            "A guerra dos tronos é o primeiro livro da série best-seller internacional As Crônicas de Gelo e Fogo, que deu origem à adaptação de sucesso da HBO, Game of Thrones.\n"
+                + //
+                "O verão pode durar décadas. O inverno, toda uma vida. E a guerra dos tronos começou. Como Guardião do Norte, lorde Eddard Stark não fica feliz quando o rei Robert o proclama a nova Mão do Rei. Sua honra o obriga a aceitar o cargo e deixar seu posto em Winterfell para rumar para a corte, onde os homens fazem o que lhes convém, não o que devem... e onde um inimigo morto é algo a ser admirado.\n"
+                + //
+                "",
+            "Ficção", "./capas/91+1SUO3vUL._AC_UF1000,1000_QL80_.jpg"));
     adicionarLivro(new Livro("Crime e Castigo", "Fiodor Dostoievski", "9788420741468", "Martin Claret", "01/06/2013",
         "Crime e castigo é um daqueles romances universais que, concebidos no decorrer do romântico século XIX, abriram caminhos ao trágico realismo literário dos tempos modernos. Contando nele a soturna história de um assassino em busca de redenção e ressurreição espiritual, Dostoiévski chegou a explorar, como nenhum outro escritor de sua época, as mais diversas facetas da psicologia humana sujeita a abalos e distorções e, desse modo, criou uma obra de imenso valor artístico, merecidamente cultuada em todas as partes do mundo. O fascinante efeito que produz a leitura de Crime e castigo ― angústia, revolta e compaixão renovadas a cada página com um desenlace aliviador ― poderia ser comparado à catarse dos monumentais dramas gregos.",
         "Não Ficção", "./capas/crime-castigo.jpg"));
@@ -19,10 +25,6 @@ public class CatalogoDeLivros {
   public void adicionarLivro(Livro livro) {
     livros.adiciona(livro);
     ordenarLivrosPorISBN();
-  }
-
-  public int buscarLivro(String isbn) {
-    return buscarLivroBinario(isbn, 0, livros.tamanho() - 1);
   }
 
   private void ordenarLivrosPorISBN() {
@@ -48,22 +50,4 @@ public class CatalogoDeLivros {
     lista.adiciona(posicao, livro);
   }
 
-  private int buscarLivroBinario(String isbn, int inicio, int fim) {
-    int min = inicio;
-    int max = fim;
-    while (min <= max) {
-      int med = (min + max) >>> 1;
-      Livro livro = (Livro) livros.pega(med);
-      int comparacao = livro.getIsbn().compareTo(isbn);
-      if (comparacao == 0) {
-        return med;
-      }
-      if (comparacao < 0) {
-        min = med + 1;
-      } else {
-        max = med - 1;
-      }
-    }
-    return -1;
-  }
 }

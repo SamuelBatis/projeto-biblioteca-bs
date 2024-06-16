@@ -12,7 +12,7 @@ public class CatalogoUI extends JFrame {
   private JLabel isbnInfoLabel;
   private JLabel editoraLabel;
   private JLabel dataPublicacaoLabel;
-  private JLabel descricaoLabel;
+  private JTextArea descricaoArea;
   private JLabel generoLabel;
 
   public CatalogoUI() {
@@ -70,7 +70,7 @@ public class CatalogoUI extends JFrame {
     isbnInfoLabel = createInfoLabel("ISBN:", infoPanel, gbc, 2);
     editoraLabel = createInfoLabel("Editora:", infoPanel, gbc, 3);
     dataPublicacaoLabel = createInfoLabel("Data de Publicação:", infoPanel, gbc, 4);
-    descricaoLabel = createInfoLabel("Descrição:", infoPanel, gbc, 5);
+    descricaoArea = createTextArea("Descrição:", infoPanel, gbc, 5);
     generoLabel = createInfoLabel("Gênero:", infoPanel, gbc, 6);
 
     resultadoPanel.add(infoPanel, BorderLayout.CENTER);
@@ -90,9 +90,26 @@ public class CatalogoUI extends JFrame {
     return valueLabel;
   }
 
+  private JTextArea createTextArea(String labelText, JPanel panel, GridBagConstraints gbc, int row) {
+    JLabel label = new JLabel(labelText);
+    JTextArea textArea = new JTextArea(5, 20);
+    textArea.setLineWrap(true);
+    textArea.setWrapStyleWord(true);
+    textArea.setEditable(false);
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    scrollPane.setPreferredSize(new Dimension(400, 100));
+    gbc.gridx = 0;
+    gbc.gridy = row;
+    panel.add(label, gbc);
+    gbc.gridx = 1;
+    panel.add(scrollPane, gbc);
+    return textArea;
+  }
+
   private void buscarLivro() {
+    LivroUtils livroUtils = new LivroUtils();
     String isbn = isbnField.getText();
-    int posicao = catalogo.buscarLivro(isbn);
+    int posicao = livroUtils.buscar_livro(isbn, catalogo.livros);
     if (posicao != -1) {
       Livro livro = (Livro) catalogo.livros.pega(posicao);
       tituloLabel.setText(livro.getTitulo());
@@ -100,7 +117,7 @@ public class CatalogoUI extends JFrame {
       isbnInfoLabel.setText(livro.getIsbn());
       editoraLabel.setText(livro.getEditora());
       dataPublicacaoLabel.setText(livro.getDataPublicacao());
-      descricaoLabel.setText("<html>" + livro.getDescricao() + "</html>"); // Suporte para múltiplas linhas
+      descricaoArea.setText(livro.getDescricao());
       generoLabel.setText(livro.getGenero());
       ImageIcon capaIcon = new ImageIcon(livro.getCaminhoCapa());
       capaLabel.setIcon(new ImageIcon(capaIcon.getImage().getScaledInstance(150, 200, Image.SCALE_SMOOTH)));
@@ -110,7 +127,7 @@ public class CatalogoUI extends JFrame {
       isbnInfoLabel.setText("");
       editoraLabel.setText("");
       dataPublicacaoLabel.setText("");
-      descricaoLabel.setText("");
+      descricaoArea.setText("");
       generoLabel.setText("");
       capaLabel.setIcon(null);
       JOptionPane.showMessageDialog(this, "Livro não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);

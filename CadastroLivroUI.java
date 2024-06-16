@@ -45,8 +45,11 @@ public class CadastroLivroUI extends JFrame {
     formPanel.add(new JLabel("Descrição:"), gbc);
     gbc.gridx = 1;
     descricaoArea = new JTextArea(5, 20);
-    descricaoArea.setPreferredSize(new Dimension(300, 100));
-    formPanel.add(new JScrollPane(descricaoArea), gbc);
+    descricaoArea.setLineWrap(true);
+    descricaoArea.setWrapStyleWord(true);
+    JScrollPane descricaoScrollPane = new JScrollPane(descricaoArea);
+    descricaoScrollPane.setPreferredSize(new Dimension(300, 100));
+    formPanel.add(descricaoScrollPane, gbc);
 
     gbc.gridx = 0;
     gbc.gridy = 7;
