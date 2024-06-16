@@ -18,7 +18,8 @@ public class CatalogoDeLivros {
     adicionarLivro(new Livro("Crime e Castigo", "Fiodor Dostoievski", "9788420741468", "Martin Claret", "01/06/2013",
         "Crime e castigo é um daqueles romances universais que, concebidos no decorrer do romântico século XIX, abriram caminhos ao trágico realismo literário dos tempos modernos. Contando nele a soturna história de um assassino em busca de redenção e ressurreição espiritual, Dostoiévski chegou a explorar, como nenhum outro escritor de sua época, as mais diversas facetas da psicologia humana sujeita a abalos e distorções e, desse modo, criou uma obra de imenso valor artístico, merecidamente cultuada em todas as partes do mundo. O fascinante efeito que produz a leitura de Crime e castigo ― angústia, revolta e compaixão renovadas a cada página com um desenlace aliviador ― poderia ser comparado à catarse dos monumentais dramas gregos.",
         "Não Ficção", "./capas/crime-castigo.jpg"));
-    adicionarLivro(new Livro("Livro C", "Autor C", "1122334455", "Editora C", "03/03/2022", "Descrição do Livro C",
+    adicionarLivro(new Livro("A Metamorfose", "Franz Kafka", "9780393095333", "Kurt Wolff Verlag", "03/03/1915",
+        "O caixeiro-viajante Gregor acorda metamorfoseado em um enorme inseto e percebe que tudo mudou e não só em sua vida, mas no mundo. Ele, então, acompanha as reações de sua família ao perceberem o estranho ser em que ele se tornou. E, enquanto luta para se manter vivo, reflete sobre o comportamento de seus pais, de sua irmã e sobre a sua nova vida",
         "Romance", "./capas/Metamorf.jpg"));
   }
 
