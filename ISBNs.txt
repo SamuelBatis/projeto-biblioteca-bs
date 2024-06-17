@@ -1,5 +1,0 @@
-isbn de livros que ja começam cadastrados no sistema
-
-9788496208490 - Guerra dos tronos
-9788420741468 - Crime e Castigo
-9780393095333 - A Metamorfose
